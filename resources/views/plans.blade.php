@@ -44,27 +44,28 @@
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
-                        @foreach ( $books as $book)
+                        @foreach ( $plans as $plan)
                          
                             <div class="p-6">
-                                <div class="flex items-center">
-                                    <img src="{{Storage::url($book->image->url)}}" alt="" height="50px" width="50px">
-                                    <div class="ml-4 text-lg leading-7 font-semibold"><a href="#" class="underline text-gray-900 dark:text-white">   {{ $book->name }}</a></div>
+                                <div class="ml-12">
+                                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                        {{ $plan->name }}
+                                    </div>
                                 </div>
                                 
                                 <div class="ml-12">
                                     <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                        {{ $book->description }}
+                                        {{ $plan->description }}
                                     </div>
                                 </div>
                                 <div class="ml-12">
                                     <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                       Precio del libro:  {{ $book->price }} €
+                                       Precio del libro:  {{ $plan->cost }} €
                                     </div>
                                 </div>
                                 <div class="ml-12">
                                     <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm flex items-center">
-                                      <a href="{{route('purchase', ['id' => $book->id])}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> 
+                                      <a href="{{route('purchase', ['id' => $plan->id])}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> 
                                           Comprar
                                       </a>
                                     </div>

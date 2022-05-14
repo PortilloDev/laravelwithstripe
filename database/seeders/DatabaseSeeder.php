@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Image;
+use App\Models\Plan;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,8 +24,8 @@ class DatabaseSeeder extends Seeder
       Storage::makeDirectory('books');
 
       User::factory()->create([
-        'name'=> 'Ivan',
-        'email'=> 'i@mail.com',
+        'name'=> 'User',
+        'email'=> 'user@mail.com',
         'password'=> \bcrypt('12345678'),
       ]);
       
@@ -36,5 +37,29 @@ class DatabaseSeeder extends Seeder
             'imageable_type' =>'App\Models\Book',
         ]);
       }
+
+      Plan::create([
+        'name'        => 'Mensual',
+        'slug'        => 'mensual',
+        'stripe_plan' => 'Mensual',
+        'cost'        => 19.99, 
+        'description' => 'Acceso por un mes a toda la biblioteca'
+      ]);
+      Plan::create([
+        'name'        => 'Anual por genero',
+        'slug'        => 'anual-por-genero',
+        'stripe_plan' => 'Individual',
+        'cost'        =>  39.99, 
+        'description' => 'Acceso por un año a todos los libros de un genero'
+      ]);
+      Plan::create([
+        'name'        => 'Anual',
+        'slug'        => 'anual',
+        'stripe_plan' => 'Anual',
+        'cost'        => 59.99, 
+        'description' => 'Acceso por un año a toda la biblioteca'
+      ]);
+    
+
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',  [BookController::class, 'index'])->name('bookstore');
+Route::get('/plans',  [PlanController::class, 'getPlan'])->name('plans');
 Route::get('/purchase/{id}',  [PurchaseController::class, 'show'])->middleware('auth')->name('purchase');
 Route::post('/payments/pay',  [PaymentController::class, 'pay'])->middleware('auth')->name('pay');
 Route::get('/payments/approval',  [PaymentController::class, 'approval'])->middleware('auth')->name('approval');

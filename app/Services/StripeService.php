@@ -3,11 +3,11 @@
 namespace App\Services;
 
 use Illuminate\Http\Request;
-use App\Traits\Services;
+use App\Traits\ExternalServices;
 
 class StripeService
 {
-    use Services;
+    use ExternalServices;
 
     protected $key;
     protected $secret;
@@ -43,5 +43,20 @@ class StripeService
     public function handleApproval()
     {
         //
+    }
+
+    public function createIntent(float $price, string $currency = 'eur', string $paymentMethod )
+    {
+        return $this->makeRequest(
+            'POST',
+            '/v1/payment_intents',
+            ['Authorization' => $this->resolveAccessToken() ],
+            [
+                'amount'                => round($price * 100),
+                'currency'              => strtolower($currency),
+                // 'payment_method'        => $paymentMethod,
+                'payment_method_types' => ['card'],
+            ]
+        );
     }
 }

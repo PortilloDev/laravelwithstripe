@@ -14,15 +14,15 @@
                             @csrf
                             <div class="flex items-center">
                                 <img src="{{Storage::url($book->image->url)}}" alt="" height="50px" width="50px">
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">   {{ $book->name }}</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="#" class="underline text-gray-900 dark:text-white">   {{ $book->name }}</a></div>
                             </div>
                             <div class="p-6">
                                 <div class="flex items-center">
-                                    <label for="price">Importe a pagar es: {{ $book->price }} $</label>
+                                    <label for="price">Importe a pagar es: {{ $book->price }} €</label>
                                     <input type="hidden" name="price" value="{{$book->price}}">
                                 </div>
                             </div>
-                           
+                           @include('components.stripe-form')
                             <div class="flex items-center">
                                 <button id="payButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Pagar </button>
                             </div>
