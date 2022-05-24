@@ -19,7 +19,7 @@ class BookFactory extends Factory
         return [
             'name'        => $this->faker->sentence(),
             'description' => $this->faker->sentence(),
-            'price'       => 19.99,
+            'price'       => 10,
         ];
     }
 }

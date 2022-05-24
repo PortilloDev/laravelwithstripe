@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [BookController::class, 'index'])->name('bookstore');
 Route::get('/plans',  [PlanController::class, 'getPlan'])->name('plans');
-Route::get('/purchase/{id}',  [PurchaseController::class, 'show'])->middleware('auth')->name('purchase');
+Route::get('/cart/{id}',  [PurchaseController::class, 'show'])->middleware('auth')->name('purchase');
 Route::post('/payments/pay',  [PaymentController::class, 'pay'])->middleware('auth')->name('pay');
 Route::get('/payments/approval',  [PaymentController::class, 'approval'])->middleware('auth')->name('approval');
 Route::get('/payments/cancelled',  [PaymentController::class, 'cancelled'])->middleware('auth')->name('cancelled');

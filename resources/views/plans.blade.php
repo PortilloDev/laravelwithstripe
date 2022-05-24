@@ -38,18 +38,19 @@
             @endif
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <h1 class="text-gray-900 text-4xl">La Biblioteca Online</h1>
+                    <h1 class="text-gray-900 text-4xl">Planes para La Biblioteca Online:</h1>
                 </div>
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="flex flex-cols-1 gap-4 md:flex-cols-3">
                         @foreach ( $plans as $plan)
                          
-                            <div class="p-6">
+                            <div class="p-6 border-solid border-2 border-indigo-600 rounded-2xl">
                                 <div class="ml-12">
-                                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                        {{ $plan->name }}
+                                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-3xl">
+                                       <h3>{{ $plan->name }}</h3> 
                                     </div>
                                 </div>
                                 
@@ -60,7 +61,7 @@
                                 </div>
                                 <div class="ml-12">
                                     <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                       Precio del libro:  {{ $plan->cost }} €
+                                       Precio del plan:  {{ $plan->cost }} €
                                     </div>
                                 </div>
                                 <div class="ml-12">

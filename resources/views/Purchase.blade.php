@@ -9,9 +9,16 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                @if (Session::has('success'))
+                    <div class="alert alert-success text-center">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <p>{{ Session::get('success') }}</p>
+                </div>
+                @endif
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <form action="{{route('pay')}}" method="POST" id="paymentForm">
                             @csrf
+                            <input type="hidden" name="book" id="book" value="{{$book}}">
                             <div class="flex items-center">
                                 <img src="{{Storage::url($book->image->url)}}" alt="" height="50px" width="50px">
                                 <div class="ml-4 text-lg leading-7 font-semibold"><a href="#" class="underline text-gray-900 dark:text-white">   {{ $book->name }}</a></div>

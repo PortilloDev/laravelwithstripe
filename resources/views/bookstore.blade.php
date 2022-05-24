@@ -26,12 +26,21 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ route('bookstore') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Bookstore</a>
+                    <div class="flex gap-4">
+                        <div>
+                            <a href="{{ route('bookstore') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Bookstore</a>
+                        </div>
+                        <div>
+                            <a href="{{ route('plans') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Planes</a>
+                        </div>
+                    </div>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
                         @if (Route::has('register'))
+
                             <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+
                         @endif
                     @endauth
                 </div>

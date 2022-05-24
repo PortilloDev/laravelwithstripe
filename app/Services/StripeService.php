@@ -5,6 +5,8 @@ namespace App\Services;
 use Illuminate\Http\Request;
 use App\Traits\ExternalServices;
 
+
+
 class StripeService
 {
     use ExternalServices;
@@ -12,12 +14,16 @@ class StripeService
     protected $key;
     protected $secret;
     protected $baseUri;
+    protected $stripe;
 
     public function __construct()
     {
         $this->baseUri = config('services.stripe.base_uri');
         $this->key = config('services.stripe.key');
         $this->secret = config('services.stripe.secret');
+        $this->stripe = new \Stripe\StripeClient(
+            config('services.stripe.secret')
+          );
     }
     
     public function resolveAuthorization(&$queryParams, &$formParams, &$headers)
@@ -45,18 +51,30 @@ class StripeService
         //
     }
 
+    /**
+     * Create a payment intention
+     */
     public function createIntent(float $price, string $currency = 'eur', string $paymentMethod )
     {
-        return $this->makeRequest(
-            'POST',
-            '/v1/payment_intents',
-            ['Authorization' => $this->resolveAccessToken() ],
-            [
-                'amount'                => round($price * 100),
-                'currency'              => strtolower($currency),
-                // 'payment_method'        => $paymentMethod,
-                'payment_method_types' => ['card'],
-            ]
-        );
+
+         return  $this->stripe->paymentIntents->create([
+            'amount' => $price*100,
+            'currency' => $currency,
+            'payment_method_types' => ['card'],
+            'payment_method'        => $paymentMethod,
+          ]);
+      
     }
+
+    /**
+     * Confirm an intention to pay
+     */
+    public function confirmPayment($paymentIntentId, $paymentMethod)
+    {
+        $this->stripe->paymentIntents->confirm(
+            $paymentIntentId,
+            ['payment_method' => $paymentMethod]
+          );
+    }
+    
 }
