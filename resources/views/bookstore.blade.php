@@ -31,7 +31,7 @@
                             <a href="{{ route('bookstore') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Bookstore</a>
                         </div>
                         <div>
-                            <a href="{{ route('plans') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Planes</a>
+                            <a href="{{ route('subscribe.plans') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Planes</a>
                         </div>
                     </div>
                     @else

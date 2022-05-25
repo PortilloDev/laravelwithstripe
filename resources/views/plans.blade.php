@@ -44,36 +44,41 @@
                 </div>
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="flex flex-cols-1 gap-4 md:flex-cols-3">
-                        @foreach ( $plans as $plan)
-                         
-                            <div class="p-6 border-solid border-2 border-indigo-600 rounded-2xl">
-                                <div class="ml-12">
-                                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-3xl">
-                                       <h3>{{ $plan->name }}</h3> 
+                    <form action="{{route('subscribe.store')}}">
+                        <div class="flex flex-cols-1 gap-4 md:flex-cols-3 p-4">
+
+                        
+                            @foreach ( $plans as $plan)
+                            
+                                <div class="p-6 border-solid border-2 border-indigo-600 rounded-2xl">
+                                    <div class="ml-12">
+                                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-3xl">
+                                        <h3>{{ $plan->name }}</h3> 
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="ml-12">
+                                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                            {{ $plan->description }}
+                                        </div>
+                                    </div>
+                                    <div class="ml-12">
+                                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                            Precio del plan:  {{ $plan->cost }} €
+                                        </div>
+                                    </div>
+                                    <div class="ml-12">
+                                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm flex items-center">
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="ml-12">
-                                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                        {{ $plan->description }}
-                                    </div>
-                                </div>
-                                <div class="ml-12">
-                                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                       Precio del plan:  {{ $plan->cost }} €
-                                    </div>
-                                </div>
-                                <div class="ml-12">
-                                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm flex items-center">
-                                      <a href="{{route('purchase', ['id' => $plan->id])}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> 
-                                          Comprar
-                                      </a>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
-                        @endforeach
-                    </div>
+                            @include('components.stripe-form')
+                            <div class="flex items-center mb-4 mt-4 p-4">
+                                <button id="payButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Comprar </button>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>

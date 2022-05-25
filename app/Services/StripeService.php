@@ -15,6 +15,7 @@ class StripeService
     protected $secret;
     protected $baseUri;
     protected $stripe;
+    protected $plans;
 
     public function __construct()
     {
@@ -24,6 +25,7 @@ class StripeService
         $this->stripe = new \Stripe\StripeClient(
             config('services.stripe.secret')
           );
+        $this->plans = config('services.stripe.plans');
     }
     
     public function resolveAuthorization(&$queryParams, &$formParams, &$headers)
@@ -45,6 +47,12 @@ class StripeService
     {
         //
     }
+
+    public function handleSuscription(Request $request)
+    {
+        dd($this->plans, $request->all());
+    }
+
 
     public function handleApproval()
     {
