@@ -5,8 +5,6 @@ namespace App\Services;
 use Illuminate\Http\Request;
 use App\Traits\ExternalServices;
 
-
-
 class StripeService
 {
     use ExternalServices;
@@ -28,29 +26,22 @@ class StripeService
         $this->plans = config('services.stripe.plans');
     }
     
-    public function resolveAuthorization(&$queryParams, &$formParams, &$headers)
-    {
-        $headers['Authorization'] = $this->resolveAccessToken();
-    }
-
-    public function decodeResponse($response)
-    {
-        return \json_decode($response);
-    }
-
-    public function resolveAccessToken()
-    {
-        return "Bearer {$this->secret}";
-    }
-
-    public function handlePayment(Request $request)
-    {
-        //
-    }
 
     public function handleSuscription(Request $request)
     {
-        dd($this->plans, $request->all());
+
+        try{
+
+            $customer = $this->createCustomer($request->name, $request->email, $request->payment_method);
+            $price_select_plan= $this->plans[$request->plan];
+            $subscription = $this->createSubscription($customer->id,  $request->payment_method,  $price_select_plan);
+
+        }catch(\Exception $exception) {
+            throw new \Exception($exception->getMessage(), 1);
+            
+        }
+
+        return  $subscription;
     }
 
 
@@ -83,6 +74,35 @@ class StripeService
             $paymentIntentId,
             ['payment_method' => $paymentMethod]
           );
+    }
+
+    
+    /**
+     * Create a new customer
+     */
+    public function createCustomer(string $name, string $email, string $paymentMethod)
+    {
+
+        return    $this->stripe->customers->create([
+                'name' => $name,
+                'email' => $email,
+                'payment_method' => $paymentMethod
+            ]);
+        }
+
+
+     /**
+     * Create a new subscription
+     */
+    public function createSubscription( $customerId, $paymentMethod, $priceId)
+    {
+        return $this->stripe->subscriptions->create([
+            'customer' =>  $customerId,
+            'items' => [
+              ['price' => $priceId],
+            ],
+            'default_payment_method' =>  $paymentMethod
+          ]);
     }
     
 }

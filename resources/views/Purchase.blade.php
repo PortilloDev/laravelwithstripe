@@ -30,6 +30,12 @@
                                 </div>
                             </div>
                            @include('components.stripe-form')
+                           <div class="p-6">
+                            <label for="">Detalles de tarjeta:</label>
+                            <div id="cardElement"></div>
+                                <small class="text-base text-red-600" id="cardErrors" role="alert"></small>
+                                <input type="hidden" name="payment_method" id="paymentMethod">
+                            </div>
                             <div class="flex items-center">
                                 <button id="payButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Pagar </button>
                             </div>

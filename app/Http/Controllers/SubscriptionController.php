@@ -25,12 +25,22 @@ class SubscriptionController extends Controller
     public function store(Request $request) 
     {
         $rules = [
-            'plan' => ['required', 'exists:plans,slug'],
+            'plan'  => ['required', 'exists:plans,slug'],
+            'name'  => ['required'],
+            'email' => ['required'],
         ];
 
         $request->validate($rules);
 
-        $this->stripe->handleSuscription($request);
+        try{
+
+            $this->stripe->handleSuscription($request);
+        }catch(\Exception $exception) {
+            throw new \Exception($exception->getMessage(), 1);
+            
+        }
+
+        return view('confirmation_page');
     }
 
 

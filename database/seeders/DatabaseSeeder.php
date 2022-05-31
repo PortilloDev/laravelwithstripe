@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
       Plan::factory()->create([
         'name'        => 'Mensual',
         'slug'        => 'mensual',
-        'stripe_plan' => 'Mensual',
+        'stripe_plan' => 'mensual',
         'cost'        => 30, 
         'description' => 'Acceso por un mes a toda la biblioteca'
       ]);
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
       Plan::factory()->create([
         'name'        => 'Anual',
         'slug'        => 'anual',
-        'stripe_plan' => 'Anual',
+        'stripe_plan' => 'anual',
         'cost'        => 60, 
         'description' => 'Acceso por un año a toda la biblioteca'
       ]);

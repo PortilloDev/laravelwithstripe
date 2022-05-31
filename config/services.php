@@ -37,8 +37,8 @@ return [
         'secret'    => env('STRIPE_SECRET'),
         'class'     => App\App\Services\StripeService::class,
         'plans' => [
-            'monthly' => env('STRIPE_MONTHLY_PLAN'),
-            'yearly' => env('STRIPE_YEARLY_PLAN'),
+            'mensual' => env('STRIPE_MENSUAL_PLAN'),
+            'anual' => env('STRIPE_ANUAL_PLAN'),
         ],
     ],
 
