@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Proceso de pago') }}
+            {{ __('Payment process') }}
         </h2>
     </x-slot>
 
@@ -9,12 +9,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                @if (Session::has('success'))
-                    <div class="alert alert-success text-center">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <p>{{ Session::get('success') }}</p>
-                </div>
-                @endif
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <form action="{{route('pay')}}" method="POST" id="paymentForm">
                             @csrf
@@ -25,19 +19,14 @@
                             </div>
                             <div class="p-6">
                                 <div class="flex items-center">
-                                    <label for="price">Importe a pagar es: {{ $book->price }} €</label>
+                                    <label for="price">Amount to pay is: {{ $book->price }} €</label>
                                     <input type="hidden" name="price" value="{{$book->price}}">
                                 </div>
                             </div>
                            @include('components.stripe-form')
-                           <div class="p-6">
-                            <label for="">Detalles de tarjeta:</label>
-                            <div id="cardElement"></div>
-                                <small class="text-base text-red-600" id="cardErrors" role="alert"></small>
-                                <input type="hidden" name="payment_method" id="paymentMethod">
-                            </div>
+                          
                             <div class="flex items-center">
-                                <button id="payButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Pagar </button>
+                                <button id="payButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Pay </button>
                             </div>
                         </form>
                     </div>

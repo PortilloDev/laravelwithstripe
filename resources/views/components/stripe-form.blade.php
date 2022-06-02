@@ -1,6 +1,6 @@
 <div class="p-6">
-    <label for="">Detalles de tarjeta:</label>
-    <div id="cardElement"></div>
+    <label  for="">Card details:</label>
+    <div class="mt-4"  id="cardElement"></div>
     <small class="text-base text-red-600" id="cardErrors" role="alert"></small>
     <input type="hidden" name="payment_method" id="paymentMethod">
 </div>

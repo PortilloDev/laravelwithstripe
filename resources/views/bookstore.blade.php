@@ -31,7 +31,7 @@
                             <a href="{{ route('bookstore') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Bookstore</a>
                         </div>
                         <div>
-                            <a href="{{ route('subscribe.plans') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Planes</a>
+                            <a href="{{ route('subscribe.plans') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Plans</a>
                         </div>
                     </div>
                     @else
@@ -48,7 +48,7 @@
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <h1 class="text-gray-900 text-4xl">La Biblioteca Online</h1>
+                    <h1 class="text-gray-900 text-4xl">The Online Library</h1>
                 </div>
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
@@ -68,13 +68,13 @@
                                 </div>
                                 <div class="ml-12">
                                     <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                       Precio del libro:  {{ $book->price }} €
+                                        book price:  {{ $book->price }} €
                                     </div>
                                 </div>
                                 <div class="ml-12">
                                     <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm flex items-center">
                                       <a href="{{route('purchase', ['id' => $book->id])}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> 
-                                          Comprar
+                                        To buy
                                       </a>
                                     </div>
                                 </div>

@@ -9,9 +9,9 @@ class SubscriptionController extends Controller
 {
     protected $stripe;
 
-    public function __construct()
+    public function __construct(StripeService $stripe)
     {
-        $this->stripe = new StripeService();
+        $this->stripe =  $stripe;
     }
 
     public function show() 

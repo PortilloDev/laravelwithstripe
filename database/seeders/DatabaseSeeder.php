@@ -20,9 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-      Storage::deleteDirectory('books');
-      Storage::makeDirectory('books');
-
+    
       User::factory()->create([
         'name'=> 'User',
         'email'=> 'user@mail.com',
