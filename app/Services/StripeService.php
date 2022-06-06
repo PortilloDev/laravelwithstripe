@@ -32,7 +32,7 @@ class StripeService
 
         try{
 
-            $customer = $this->createCustomer($request->name, $request->email, $request->payment_method);
+            $customer = $this->createCustomer( auth()->user()->name,  auth()->user()->email, $request->payment_method);
             $price_select_plan= $this->plans[$request->plan];
             $subscription = $this->createSubscription($customer->id,  $request->payment_method,  $price_select_plan);
 
@@ -44,11 +44,6 @@ class StripeService
         return  $subscription;
     }
 
-
-    public function handleApproval()
-    {
-        //
-    }
 
     /**
      * Create a payment intention

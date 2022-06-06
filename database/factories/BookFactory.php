@@ -19,7 +19,7 @@ class BookFactory extends Factory
         return [
             'name'        => $this->faker->sentence(),
             'description' => $this->faker->sentence(),
-            'price'       => 10,
+            'price'       => random_int(8, 15),
         ];
     }
 }

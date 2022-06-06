@@ -28,19 +28,19 @@ class DatabaseSeeder extends Seeder
       ]);
       
       Plan::factory()->create([
-        'name'        => 'Mensual',
-        'slug'        => 'mensual',
-        'stripe_plan' => 'mensual',
+        'name'        => 'Monthly',
+        'slug'        => 'monthly',
+        'stripe_plan' => 'monthly',
         'cost'        => 30, 
-        'description' => 'Acceso por un mes a toda la biblioteca'
+        'description' => 'One month access to the entire library'
       ]);
 
       Plan::factory()->create([
-        'name'        => 'Anual',
-        'slug'        => 'anual',
-        'stripe_plan' => 'anual',
+        'name'        => 'Yearly',
+        'slug'        => 'yearly',
+        'stripe_plan' => 'yearly',
         'cost'        => 60, 
-        'description' => 'Acceso por un año a toda la biblioteca'
+        'description' => 'One-year access to the entire library'
       ]);
       
       $books = Book::factory(10)->create();

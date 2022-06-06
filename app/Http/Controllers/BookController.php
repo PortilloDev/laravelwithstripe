@@ -13,4 +13,6 @@ class BookController extends Controller
 
         return view('bookstore', compact('books'));
     }
+
+
 }

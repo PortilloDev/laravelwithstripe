@@ -4,11 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\StripeService;
+use App\Models\Book;
+
 use Stripe;
 use Session;
 
 class PaymentController extends Controller
 {
+    protected $stripe;
+
+    public function __construct(StripeService $stripe)
+    {
+        $this->stripe = $stripe;
+    }
+    public function show($id)
+    {
+          $book = Book::find($id);
+
+          return view('Purchase', compact('book'));
+    }
+
     /**
      * Creates an intention to pay and its confirmation
      * 
@@ -21,11 +36,10 @@ class PaymentController extends Controller
        
         $request->validate($rules);
        
-        $stripe = new StripeService();
 
         
         try{
-            $payment_intent = $stripe->createIntent($request->price, 'eur', $request->payment_method );
+            $payment_intent = $this->stripe->createIntent($request->price, 'eur', $request->payment_method );
 
             $this->approval($payment_intent->id, $request->payment_method);
 
@@ -45,7 +59,7 @@ class PaymentController extends Controller
     public function approval($payment_intent_id, $payment_method)
     {
         try{
-            $stripe->confirmPayment($payment_intent_id, $payment_method);
+            $this->stripe->confirmPayment($payment_intent_id, $payment_method);
 
         }catch(\Excepction $exception){
 

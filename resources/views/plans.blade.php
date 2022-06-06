@@ -4,61 +4,58 @@
             {{ __('Subscription') }}
         </h2>
     </x-slot>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <form action="{{route('subscribe.store')}}" method="POST" id="paymentForm">
-                            @csrf
-                            <div class="flex gap-4 p-6">
+    @push('styles')
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    @endpush
+    <div class="container m-auto">
+        <div class="flex flex-wrap items-center justify-center w-full text-center">
+            <!-- 3 x pricing plan columns here -->
+            <!-- basic plan -->
 
-                                @foreach ( $plans as $plan)
-
-                                <div class="p-6 rounded-2xl" style="
-                                                border-width: 6px;
-                                                border-color: blueviolet;
-                                                margin-left:15px">
-                                                
-                                    <label class="btn btn-outline-info rounded m-2 p-3 w-full g-4">
-                                        <input type="radio" name="plan" value="{{ $plan->stripe_plan }}" required>
-                                        <p class="h2 font-weight-bold text-capitalize">
-                                            Plan {{ $plan->name }}
-                                        </p>
-
-                                        <p class="display-4 text-capitalize">
-                                            {{ $plan->cost }} €
-                                        </p>
-                                    </label>
-
-                                    <div class="ml-12">
-                                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm flex items-center">
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
+            <div class="grid grid-cols-2">
+                @foreach ( $plans as $plan)
+                <div class="w-full  p-4">
+                    <div class="flex flex-col rounded border-2 border-blue-700 bg-blue-700">
+                        <div class="py-5 text-blue-700 bg-white">
+                            <h3> Plan {{ $plan->name }}</h3>
+                            <p class="text-5xl font-bold">
+                                {{ $plan->cost }}.<span class="text-3xl">00</span> €
+                            </p>
+                            <input type="hidden" id="stripe_plan" value="{{$plan->stripe_plan }}">
+                        </div>
+                        <div class="py-5 bg-blue-700 text-white rounded-b">
+                            <div class="mb-5">
+                                <p>{{$plan->description }}</p>
+                                <p>Another feature plan feature</p>
+                                <p>Yet another plan feature</p>
                             </div>
-
-                            <div class="grid items-center mb-4">
-                                <input type="text" name="name" placeholder="Enter Your Name"
-                                    class="w-1/3 px-4 py-2 border-b-2 border-gray-400 outline-none  focus:border-gray-400" />
+                            <div>
+                                <button type="button" data-id="{{$plan->stripe_plan}}" class="px-5 py-2 mt-3 uppercase openModal  rounded bg-white text-blue-700 font-semibold hover:bg-blue-900 hover:text-white">Get Started</button>
                             </div>
-                            <div class="grid items-center">
-                                <input type="email" name="email" placeholder="Enter Your Email"
-                                    class="w-1/3 px-4 py-2 border-b-2 border-gray-400 outline-none  focus:border-gray-400" />
-                            </div>
-                            @include('components.stripe-form')
-                            <div class="flex items-center mt-4">
-                                <button id="payButton"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Pay
-                                </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
+                @endforeach
+                @include('components.modal-pay-suscription')
             </div>
         </div>
     </div>
 
+    @push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    
+        $(document).ready(function () {
+            $('.openModal').on('click', function(e){
+                $('#interestModal').removeClass('invisible');
+                $('#type_plan').val($(this).attr('data-id'));
+
+            });
+            $('.closeModal').on('click', function(e){
+                $('#interestModal').addClass('invisible');
+            });
+        });
+        </script>
+@endpush
 
 </x-app-layout>

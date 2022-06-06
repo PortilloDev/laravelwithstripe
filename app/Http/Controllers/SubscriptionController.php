@@ -26,8 +26,7 @@ class SubscriptionController extends Controller
     {
         $rules = [
             'plan'  => ['required', 'exists:plans,slug'],
-            'name'  => ['required'],
-            'email' => ['required'],
+
         ];
 
         $request->validate($rules);
@@ -46,12 +45,12 @@ class SubscriptionController extends Controller
 
     public function approval() 
     {
-
+            // Code... 
     }
 
     public function cancelled() 
     {
-
+            // Code... 
     }
 
 
